@@ -6,7 +6,7 @@ export class BillingNote {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @Column('date')
   billingDate: Date;
 
   @Column()

@@ -10,7 +10,7 @@ import { Zone } from 'src/zone/entities/zone.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
 
 @Entity('clients')
-@TableInheritance({ column: { type: 'varchar', name: 'type' } })
+@TableInheritance({ column: { type: 'varchar', name: 'clientType' } })
 export abstract class Client {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,12 +24,8 @@ export abstract class Client {
   phone: string[]; //Teléfonos del cliente
   @Column({ length: 60 })
   address: string; //Dirección del cliente
-  /* Zona del cliente
-  //
-  // @Column({ length: 20 })
-  // region: string; //ciudad del cliente
-  //
-  */
+  @Column({ type: 'varchar', nullable: false })
+  clientType: string;
   @OneToMany(() => Sale, sale => sale.client)
   sales: Sale[]; //Ventas asociadas al cliente
   @OneToMany(() => Advance, advance => advance.client)
@@ -40,8 +36,8 @@ export abstract class Client {
   zone: Zone; //Zona asociada al cliente
   @ManyToOne(() => Store, (store) => store.clients)
   store: Store; //Almacén asociado al cliente
-  // @OneToMany(() => ReturnEntity, returns => returns.client)
-  // returns: ReturnEntity[]; //Devoluciones asociadas al cliente
+  @OneToMany(() => ReturnEntity, returns => returns.client)
+  returns: ReturnEntity[]; //Devoluciones asociadas al cliente
   @OneToMany(() => BillingNote, billingNote => billingNote.client)
   notes: BillingNote[]; //Devoluciones asociadas al cliente
   @OneToMany(() => TransferSales, transferSales => transferSales.client)

@@ -6,7 +6,7 @@ export class TransferSales {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @Column('date')
   saleDate: Date;
 
   @Column()

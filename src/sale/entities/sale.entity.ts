@@ -3,6 +3,7 @@ import { Client } from 'src/client/entities/client.entity';
 import { Discount } from 'src/discount/entities/discount.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
+import { SaleDetail } from './sale-details.entity';
 
 @Entity()
 export class Sale {
@@ -42,6 +43,6 @@ export class Sale {
   @ManyToOne(() => Discount, (discount) => discount.sales)
   discount: Discount; //Descuento en la venta
 
-
-
+  @OneToMany(() => SaleDetail, detail => detail.sale)
+  details: SaleDetail[]; // Relación con el detalle de ventas
 }

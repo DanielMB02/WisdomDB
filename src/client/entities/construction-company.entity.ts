@@ -1,7 +1,8 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ChildEntity } from 'typeorm';
 import { Client } from './client.entity';
 
-@Entity()
+//@Entity()
+@ChildEntity()
 export class ConstructionClient extends Client {
   @Column()
   projectName: string; //Nombre del proyecto

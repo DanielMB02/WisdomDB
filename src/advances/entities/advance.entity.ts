@@ -1,5 +1,5 @@
 import { Client } from 'src/client/entities/client.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
 import { AdvanceControl } from './advance-control.entity';
 import { AdvanceCompensation } from './advance-compensation.entity';
 
@@ -11,7 +11,7 @@ export class Advance {
   @Column('decimal', { precision: 10, scale: 2 })
   amount: number; //Monto del anticipo
 
-  @Column('timestamp')
+  @CreateDateColumn()
   date: Date; //Fecha
 
   @ManyToOne(() => Client, client => client.advances)

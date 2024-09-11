@@ -1,7 +1,8 @@
 import { Client } from "src/client/entities/client.entity";
 import { Product } from "src/product/entities/product.entity";
-import { Column, CreateDateColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('returns')
 export class ReturnEntity {
     @PrimaryGeneratedColumn()
     id: number;
@@ -12,10 +13,10 @@ export class ReturnEntity {
     @Column()
     reason: string;
 
-    // @ManyToOne(() => Client, (client) => client.returns)
-    // client: Client; //Cliente que realiza la devolución
+    @ManyToOne(() => Client, (client) => client.returns)
+    client: Client; //Cliente que realiza la devolución
 
-    //@OneToMany(() => Product, (product) => product.returns)
-    //products: Product[]; //Productos devueltos
+    @OneToMany(() => Product, (product) => product.returns)
+    products: Product[]; //Productos devueltos
     
 }

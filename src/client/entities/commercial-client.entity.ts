@@ -1,8 +1,9 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ChildEntity } from 'typeorm';
 import { Client } from './client.entity';
 import { CommercialSize, CommercialType } from '../enums/client.enum';
 
-@Entity()
+//@Entity()
+@ChildEntity()
 export class CommercialClient extends Client {
   @Column()
   representativePhone: string; //Teléfono del representante legal

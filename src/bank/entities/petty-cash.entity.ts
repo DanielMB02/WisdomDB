@@ -20,6 +20,6 @@ export class PettyCash {
   @Column()
   replenishmentAndReconciliation: string; //Reabastecimiento y conciliación
 
-  //Relación con Control de caja chica
+  //Relación con Control de caja chica (No existe el control de caja chica)
 
 }

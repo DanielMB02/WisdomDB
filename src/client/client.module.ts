@@ -12,10 +12,11 @@ import { ZoneModule } from 'src/zone/zone.module';
 import { StoreModule } from 'src/store/store.module';
 import { ReturnsModule } from 'src/returns/returns.module';
 import { BillingsModule } from 'src/billings/billings.module';
+import { FinalClient } from './entities/final-client.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Client, CommercialClient, ConstructionClient]),
+    TypeOrmModule.forFeature([Client, CommercialClient, ConstructionClient, FinalClient]),
     forwardRef(() => SaleModule),
     forwardRef(() => AdvancesModule),
     forwardRef(() => DiscountModule),

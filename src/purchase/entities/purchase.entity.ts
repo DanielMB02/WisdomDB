@@ -4,6 +4,7 @@ import { Inventory } from 'src/store/entities/inventory.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { PurchaseCost } from './purchase-costs.entity';
+import { PurchaseDetail } from './purchase-detail.entity';
 
 @Entity({ name: 'purchases' })
 export class Purchase {
@@ -43,4 +44,6 @@ export class Purchase {
   @ManyToOne(() => PurchaseCost , purchaseCost => purchaseCost.purchases)
   purchaseCost: PurchaseCost; //Costos de compra
 
+  @OneToMany(() => PurchaseDetail, detail => detail.purchase, { cascade: true })
+  details: PurchaseDetail[]; // Detalles de la compra
 }

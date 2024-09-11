@@ -1,4 +1,6 @@
 import { Category } from 'src/category/entities/category.entity';
+import { Shade } from 'src/category/entities/shade.entity';
+import { Type } from 'src/category/entities/type.entity';
 import { ProductCommission } from 'src/commissions/entities/product-commision.entity';
 import { Discount } from 'src/discount/entities/discount.entity';
 import { ReturnEntity } from 'src/returns/entities/return.entity';
@@ -7,39 +9,63 @@ import { ProductMovement } from 'src/store/entities/product-movement.entity';
 import { StoreTransference } from 'src/store/entities/store-transference.entity';
 import { Store } from 'src/store/entities/store.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Factory } from './factory.entity';
+import { PurchaseDetail } from 'src/purchase/entities/purchase-detail.entity';
+import { SaleDetail } from 'src/sale/entities/sale-details.entity';
 
 @Entity({ name: 'products' })
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string; //Nombre del producto
+  // @Column()
+  // origin: string; //Procedencia del producto
+
+  // @Column()
+  // factory: string; //Fábrica
+
+  @ManyToOne(() => Factory, (factory) => factory.products)
+  factory: Factory; //Categoría o clase del producto
 
   @Column()
-  description: string; //Descripción del producto
+  format: string; //Formato(Medida) del producto
 
   @Column()
   code: string; //Código del producto
 
   @ManyToOne(() => Category, (category) => category.products)
-  category: Category; //Categoría del producto
+  category: Category; //Categoría o clase del producto
 
-  @Column()
+  @ManyToOne(() => Type, (type) => type.products)
+  type: Type; //Tipo 
+
+  @ManyToOne(() => Shade, (shade) => shade.products)
+  shade: Shade; //Tono 
+
+  @Column('decimal')
   unitPrice: number; //Precio unitario del producto
 
   @ManyToOne(() => Supplier, (supplier) => supplier.products)
   supplier: Supplier;
 
-  @Column()
-  stock: number; //Nombre del producto
+  // @Column()
+  // stock: number; //stock del producto
 
   @Column()
-  taxesInfo: string; //Información de impuestos
+  Description: string; //Descripción
 
   @Column()
-  measureUnit: string; //Unidad de medida
+  piecesPerBox: number; //Piezas por caja
+
+  @Column()
+  boxesPerPallet: number; //Cajas por pallets
+
+  @Column()
+  numberOfBoxes: number; //Número de cajas
+
+  @Column()
+  numberOfPallets: number; //Número de pallets
 
   @ManyToOne(() => Store, store => store.products)
   store: Store;
@@ -50,8 +76,8 @@ export class Product {
   @ManyToOne(() => Discount, (discount) => discount.products)
   discount: Discount; //descuento asociado al producto
 
-  //@ManyToOne(() => ReturnEntity, (returns) => returns.products)
-  //returns: ReturnEntity; //Devolución asociada al producto
+  @ManyToOne(() => ReturnEntity, (returns) => returns.products)
+  returns: ReturnEntity; //Devolución asociada al producto
 
   @ManyToOne(() => Inventory, (inventory) => inventory.products)
   inventory: Inventory; //Inventario
@@ -60,6 +86,12 @@ export class Product {
   productMovement: ProductMovement; //Movimiento de productos (Entrada o salida)
 
   @ManyToOne(() => ProductCommission, (productCommission) => productCommission.products)
-  productCommission: ProductCommission; //Devolución asociada al producto
+  productCommission: ProductCommission; //Comisión del producto
+
+  @OneToMany(() => PurchaseDetail, purchaseDetail => purchaseDetail.product)
+  purchaseDetails: PurchaseDetail[]; //Detalle de compras
+
+  @OneToMany(() => SaleDetail, saleDetail => saleDetail.product)
+  saleDetails: SaleDetail[]; //Detalle de ventas
   
 }
