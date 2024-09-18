@@ -1,27 +1,27 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './usuarios/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { ClientModule } from './client/client.module';
-import { ZoneModule } from './zone/zone.module';
-import { ProductModule } from './product/product.module';
-import { SupplierModule } from './supplier/supplier.module';
-import { SaleModule } from './sale/sale.module';
-import { PurchaseModule } from './purchase/purchase.module';
-import { StoreModule } from './store/store.module';
-import { BankModule } from './bank/bank.module';
-import { ShipmentReceivementModule } from './shipment-receivement/shipment-receivement.module';
-import { ImportCostsModule } from './import-costs/import-costs.module';
-import { CustomsDocumentationModule } from './customs-documentation/customs-documentation.module';
-import { PaymentProcessIntegrationModule } from './payment-process-integration/payment-process-integration.module';
-import { CategoryModule } from './category/category.module';
-import { DiscountModule } from './discount/discount.module';
-import { AdvancesModule } from './advances/advances.module';
-import { BillingsModule } from './billings/billings.module';
-import { CommissionsModule } from './commissions/commissions.module';
-import { ReturnsModule } from './returns/returns.module';
+import { ClientModule } from './clientes/client.module';
+import { ZoneModule } from './zonas/zone.module';
+import { ProductModule } from './productos/product.module';
+import { SupplierModule } from './proveedores/supplier.module';
+import { SaleModule } from './ventas/sale.module';
+import { PurchaseModule } from './compras/purchase.module';
+import { StoreModule } from './almacenes/store.module';
+import { BankModule } from './bancos/bank.module';
+import { ShipmentReceivementModule } from './envios-recepciones/shipment-receivement.module';
+import { ImportCostsModule } from './costos-de-importacion/import-costs.module';
+import { CustomsDocumentationModule } from './documentacion-aduanera/customs-documentation.module';
+import { PaymentProcessIntegrationModule } from './proceso-de-pagos-y-contabilidad/payment-process-integration.module';
+import { CategoryModule } from './categorias/category.module';
+import { DiscountModule } from './descuentos/discount.module';
+import { AdvancesModule } from './anticipos/advances.module';
+import { BillingsModule } from './cobranzas/billings.module';
+import { CommissionsModule } from './comisiones/commissions.module';
+import { ReturnsModule } from './devoluciones/returns.module';
 
 @Module({
   imports: [
@@ -34,7 +34,7 @@ import { ReturnsModule } from './returns/returns.module';
         port: 5432,
         username: 'postgres',
         password: 'admin',
-        database: 'WisdomDB',
+        database: 'WisdomBD',
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
         logging: true
